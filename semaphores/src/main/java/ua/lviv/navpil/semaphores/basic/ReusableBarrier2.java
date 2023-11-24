@@ -1,7 +1,7 @@
 package ua.lviv.navpil.semaphores.basic;
 
 import ua.lviv.navpil.semaphores.ConcurrentRunner;
-import ua.lviv.navpil.semaphores.ThreadWaiter;
+import ua.lviv.navpil.semaphores.UnsafeNumberedRunnable;
 
 import java.util.concurrent.Semaphore;
 
@@ -17,7 +17,7 @@ public class ReusableBarrier2 {
 
         ConcurrentRunner concurrentRunner = new ConcurrentRunner();
         for (int i = 0; i < x; i++) {
-            concurrentRunner.add(new ThreadWaiter(i) {
+            concurrentRunner.add(new UnsafeNumberedRunnable(i) {
                 @Override
                 public void unsafeRun() throws InterruptedException{
                     for (int j = 0; j < 10; j++) {

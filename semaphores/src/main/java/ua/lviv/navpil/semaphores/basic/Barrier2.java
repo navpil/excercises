@@ -1,9 +1,7 @@
 package ua.lviv.navpil.semaphores.basic;
 
-import ua.lviv.navpil.semaphores.ThreadWaiter;
+import ua.lviv.navpil.semaphores.UnsafeNumberedRunnable;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.Semaphore;
@@ -24,7 +22,7 @@ public class Barrier2 {
         Semaphore mutex = new Semaphore(1);
 
         for (int i = 0; i < x; i++) {
-            ThreadWaiter threadWaiter = new ThreadWaiter(i) {
+            UnsafeNumberedRunnable unsafeRunnable = new UnsafeNumberedRunnable(i) {
                 @Override
                 public void unsafeRun() throws InterruptedException{
                     System.out.println(getNumber() + "-1");
@@ -40,7 +38,7 @@ public class Barrier2 {
                     System.out.println(getNumber() + "-2");
                 }
             };
-            scheduledExecutorService.schedule(threadWaiter, 1, TimeUnit.MILLISECONDS);
+            scheduledExecutorService.schedule(unsafeRunnable, 1, TimeUnit.MILLISECONDS);
         }
 
         scheduledExecutorService.shutdown();

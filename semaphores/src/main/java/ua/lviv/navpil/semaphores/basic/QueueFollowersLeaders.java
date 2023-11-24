@@ -1,7 +1,7 @@
 package ua.lviv.navpil.semaphores.basic;
 
 import ua.lviv.navpil.semaphores.ConcurrentRunner;
-import ua.lviv.navpil.semaphores.ThreadWaiter;
+import ua.lviv.navpil.semaphores.UnsafeNumberedRunnable;
 
 import java.util.concurrent.Semaphore;
 
@@ -24,7 +24,7 @@ public class QueueFollowersLeaders {
 
         for (int i = 0; i < 10; i++) {
             //leaders
-              concurrentRunner.add(new ThreadWaiter(i) {
+              concurrentRunner.add(new UnsafeNumberedRunnable(i) {
                   @Override
                   public void unsafeRun() throws InterruptedException {
                       leadersMutex.acquire();
@@ -36,7 +36,7 @@ public class QueueFollowersLeaders {
               });
         }
         for (int i = 0; i < 10; i++) {
-              concurrentRunner.add(new ThreadWaiter(i) {
+              concurrentRunner.add(new UnsafeNumberedRunnable(i) {
                   @Override
                   public void unsafeRun() throws InterruptedException {
                       followersMutex.acquire();

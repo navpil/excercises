@@ -1,10 +1,10 @@
 package ua.lviv.navpil.semaphores;
 
-public abstract class ThreadWaiter implements Runnable {
+public abstract class UnsafeNumberedRunnable implements Runnable {
 
     private final int number;
 
-    public ThreadWaiter(int number) {
+    public UnsafeNumberedRunnable(int number) {
         this.number = number;
     }
 
